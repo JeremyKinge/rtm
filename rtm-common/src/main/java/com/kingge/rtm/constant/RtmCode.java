@@ -6,6 +6,8 @@ package com.kingge.rtm.constant;
 
 public enum RtmCode {
 
+
+
     //消息正在处理
     RTM_MQ_MESSAGE_STATUS_PROCESSING(true, 0, "消息正在处理"),
     //消息处理成功

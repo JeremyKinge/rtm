@@ -13,4 +13,5 @@ public class CustomerException extends RuntimeException{
     public CustomerException(RtmCode shopCode) {
         this.shopCode = shopCode;
     }
+
 }
