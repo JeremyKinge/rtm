@@ -10,7 +10,6 @@ import com.kingge.rtm.pojo.TKMessage;
  **/
 public interface IRtmService {
 
-
      /**
      * @Description: 创建半消息
      * @Param: 消息实体
