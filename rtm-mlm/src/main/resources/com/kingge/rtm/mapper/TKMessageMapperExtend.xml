@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingge.rtm.mapper.TKMessageMapper" >
+
+
+
+  <!--<select id="pageByExample" resultMap="BaseResultMap" parameterType="com.kingge.rtm.pojo.TKMessageExample" >-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from t_k_message-->
+    <!--<if test="_parameter != null" >-->
+      <!--<include refid="Example_Where_Clause" />-->
+    <!--</if>-->
+    <!--<if test="orderByClause != null" >-->
+      <!--order by ${orderByClause}-->
+    <!--</if>-->
+  <!--</select>-->
+
+
+</mapper>

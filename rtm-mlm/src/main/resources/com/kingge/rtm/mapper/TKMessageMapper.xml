@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingge.rtm.mapper.TKMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.kingge.rtm.pojo.TKMessage" >
+    <id column="msg_id" property="msgId" jdbcType="VARCHAR" />
+    <result column="msg_name" property="msgName" jdbcType="VARCHAR" />
+    <result column="topic" property="topic" jdbcType="VARCHAR" />
+    <result column="quene_name" property="queneName" jdbcType="VARCHAR" />
+    <result column="msg_content" property="msgContent" jdbcType="VARCHAR" />
+    <result column="msg_status" property="msgStatus" jdbcType="VARCHAR" />
+    <result column="msg_d_status" property="msgDStatus" jdbcType="VARCHAR" />
+    <result column="retry_counts" property="retryCounts" jdbcType="VARCHAR" />
+    <result column="check_url" property="checkUrl" jdbcType="VARCHAR" />
+    <result column="check_timeout" property="checkTimeout" jdbcType="VARCHAR" />
+    <result column="check_duration" property="checkDuration" jdbcType="VARCHAR" />
+    <result column="create_msg_uid" property="createMsgUid" jdbcType="VARCHAR" />
+    <result column="create_msg_time" property="createMsgTime" jdbcType="TIMESTAMP" />
+    <result column="update_msg_uid" property="updateMsgUid" jdbcType="VARCHAR" />
+    <result column="update_msg_time" property="updateMsgTime" jdbcType="TIMESTAMP" />
+    <result column="confirm_msg_time" property="confirmMsgTime" jdbcType="TIMESTAMP" />
+    <result column="resend_msg_uid" property="resendMsgUid" jdbcType="VARCHAR" />
+    <result column="resend_msg_time" property="resendMsgTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    msg_id, msg_name, topic, quene_name, msg_content, msg_status, msg_d_status, retry_counts, 
+    check_url, check_timeout, check_duration, create_msg_uid, create_msg_time, update_msg_uid, 
+    update_msg_time, confirm_msg_time, resend_msg_uid, resend_msg_time
+  </sql>
+
+
+  <select id="pageByExample" resultMap="BaseResultMap" parameterType="com.kingge.rtm.pojo.TKMessageExample" >
+    select
+    <include refid="Base_Column_List" />
+    from t_k_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.kingge.rtm.pojo.TKMessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_k_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_k_message
+    where msg_id = #{msgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_k_message
+    where msg_id = #{msgId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.kingge.rtm.pojo.TKMessageExample" >
+    delete from t_k_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.kingge.rtm.pojo.TKMessage" >
+    insert into t_k_message (msg_id, msg_name, topic, 
+      quene_name, msg_content, msg_status, 
+      msg_d_status, retry_counts, check_url, 
+      check_timeout, check_duration, create_msg_uid, 
+      create_msg_time, update_msg_uid, update_msg_time, 
+      confirm_msg_time, resend_msg_uid, resend_msg_time
+      )
+    values (#{msgId,jdbcType=VARCHAR}, #{msgName,jdbcType=VARCHAR}, #{topic,jdbcType=VARCHAR}, 
+      #{queneName,jdbcType=VARCHAR}, #{msgContent,jdbcType=VARCHAR}, #{msgStatus,jdbcType=VARCHAR}, 
+      #{msgDStatus,jdbcType=VARCHAR}, #{retryCounts,jdbcType=VARCHAR}, #{checkUrl,jdbcType=VARCHAR}, 
+      #{checkTimeout,jdbcType=VARCHAR}, #{checkDuration,jdbcType=VARCHAR}, #{createMsgUid,jdbcType=VARCHAR}, 
+      #{createMsgTime,jdbcType=TIMESTAMP}, #{updateMsgUid,jdbcType=VARCHAR}, #{updateMsgTime,jdbcType=TIMESTAMP}, 
+      #{confirmMsgTime,jdbcType=TIMESTAMP}, #{resendMsgUid,jdbcType=VARCHAR}, #{resendMsgTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingge.rtm.pojo.TKMessage" >
+    insert into t_k_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        msg_id,
+      </if>
+      <if test="msgName != null" >
+        msg_name,
+      </if>
+      <if test="topic != null" >
+        topic,
+      </if>
+      <if test="queneName != null" >
+        quene_name,
+      </if>
+      <if test="msgContent != null" >
+        msg_content,
+      </if>
+      <if test="msgStatus != null" >
+        msg_status,
+      </if>
+      <if test="msgDStatus != null" >
+        msg_d_status,
+      </if>
+      <if test="retryCounts != null" >
+        retry_counts,
+      </if>
+      <if test="checkUrl != null" >
+        check_url,
+      </if>
+      <if test="checkTimeout != null" >
+        check_timeout,
+      </if>
+      <if test="checkDuration != null" >
+        check_duration,
+      </if>
+      <if test="createMsgUid != null" >
+        create_msg_uid,
+      </if>
+      <if test="createMsgTime != null" >
+        create_msg_time,
+      </if>
+      <if test="updateMsgUid != null" >
+        update_msg_uid,
+      </if>
+      <if test="updateMsgTime != null" >
+        update_msg_time,
+      </if>
+      <if test="confirmMsgTime != null" >
+        confirm_msg_time,
+      </if>
+      <if test="resendMsgUid != null" >
+        resend_msg_uid,
+      </if>
+      <if test="resendMsgTime != null" >
+        resend_msg_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="msgName != null" >
+        #{msgName,jdbcType=VARCHAR},
+      </if>
+      <if test="topic != null" >
+        #{topic,jdbcType=VARCHAR},
+      </if>
+      <if test="queneName != null" >
+        #{queneName,jdbcType=VARCHAR},
+      </if>
+      <if test="msgContent != null" >
+        #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgStatus != null" >
+        #{msgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="msgDStatus != null" >
+        #{msgDStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="retryCounts != null" >
+        #{retryCounts,jdbcType=VARCHAR},
+      </if>
+      <if test="checkUrl != null" >
+        #{checkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTimeout != null" >
+        #{checkTimeout,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDuration != null" >
+        #{checkDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="createMsgUid != null" >
+        #{createMsgUid,jdbcType=VARCHAR},
+      </if>
+      <if test="createMsgTime != null" >
+        #{createMsgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateMsgUid != null" >
+        #{updateMsgUid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateMsgTime != null" >
+        #{updateMsgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmMsgTime != null" >
+        #{confirmMsgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resendMsgUid != null" >
+        #{resendMsgUid,jdbcType=VARCHAR},
+      </if>
+      <if test="resendMsgTime != null" >
+        #{resendMsgTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.kingge.rtm.pojo.TKMessageExample" resultType="java.lang.Integer" >
+    select count(*) from t_k_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_k_message
+    <set >
+      <if test="record.msgId != null" >
+        msg_id = #{record.msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgName != null" >
+        msg_name = #{record.msgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topic != null" >
+        topic = #{record.topic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queneName != null" >
+        quene_name = #{record.queneName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgContent != null" >
+        msg_content = #{record.msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgStatus != null" >
+        msg_status = #{record.msgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgDStatus != null" >
+        msg_d_status = #{record.msgDStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.retryCounts != null" >
+        retry_counts = #{record.retryCounts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkUrl != null" >
+        check_url = #{record.checkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkTimeout != null" >
+        check_timeout = #{record.checkTimeout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkDuration != null" >
+        check_duration = #{record.checkDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createMsgUid != null" >
+        create_msg_uid = #{record.createMsgUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createMsgTime != null" >
+        create_msg_time = #{record.createMsgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateMsgUid != null" >
+        update_msg_uid = #{record.updateMsgUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateMsgTime != null" >
+        update_msg_time = #{record.updateMsgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.confirmMsgTime != null" >
+        confirm_msg_time = #{record.confirmMsgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.resendMsgUid != null" >
+        resend_msg_uid = #{record.resendMsgUid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resendMsgTime != null" >
+        resend_msg_time = #{record.resendMsgTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_k_message
+    set msg_id = #{record.msgId,jdbcType=VARCHAR},
+      msg_name = #{record.msgName,jdbcType=VARCHAR},
+      topic = #{record.topic,jdbcType=VARCHAR},
+      quene_name = #{record.queneName,jdbcType=VARCHAR},
+      msg_content = #{record.msgContent,jdbcType=VARCHAR},
+      msg_status = #{record.msgStatus,jdbcType=VARCHAR},
+      msg_d_status = #{record.msgDStatus,jdbcType=VARCHAR},
+      retry_counts = #{record.retryCounts,jdbcType=VARCHAR},
+      check_url = #{record.checkUrl,jdbcType=VARCHAR},
+      check_timeout = #{record.checkTimeout,jdbcType=VARCHAR},
+      check_duration = #{record.checkDuration,jdbcType=VARCHAR},
+      create_msg_uid = #{record.createMsgUid,jdbcType=VARCHAR},
+      create_msg_time = #{record.createMsgTime,jdbcType=TIMESTAMP},
+      update_msg_uid = #{record.updateMsgUid,jdbcType=VARCHAR},
+      update_msg_time = #{record.updateMsgTime,jdbcType=TIMESTAMP},
+      confirm_msg_time = #{record.confirmMsgTime,jdbcType=TIMESTAMP},
+      resend_msg_uid = #{record.resendMsgUid,jdbcType=VARCHAR},
+      resend_msg_time = #{record.resendMsgTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingge.rtm.pojo.TKMessage" >
+    update t_k_message
+    <set >
+      <if test="msgName != null" >
+        msg_name = #{msgName,jdbcType=VARCHAR},
+      </if>
+      <if test="topic != null" >
+        topic = #{topic,jdbcType=VARCHAR},
+      </if>
+      <if test="queneName != null" >
+        quene_name = #{queneName,jdbcType=VARCHAR},
+      </if>
+      <if test="msgContent != null" >
+        msg_content = #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgStatus != null" >
+        msg_status = #{msgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="msgDStatus != null" >
+        msg_d_status = #{msgDStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="retryCounts != null" >
+        retry_counts = #{retryCounts,jdbcType=VARCHAR},
+      </if>
+      <if test="checkUrl != null" >
+        check_url = #{checkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTimeout != null" >
+        check_timeout = #{checkTimeout,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDuration != null" >
+        check_duration = #{checkDuration,jdbcType=VARCHAR},
+      </if>
+      <if test="createMsgUid != null" >
+        create_msg_uid = #{createMsgUid,jdbcType=VARCHAR},
+      </if>
+      <if test="createMsgTime != null" >
+        create_msg_time = #{createMsgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateMsgUid != null" >
+        update_msg_uid = #{updateMsgUid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateMsgTime != null" >
+        update_msg_time = #{updateMsgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmMsgTime != null" >
+        confirm_msg_time = #{confirmMsgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resendMsgUid != null" >
+        resend_msg_uid = #{resendMsgUid,jdbcType=VARCHAR},
+      </if>
+      <if test="resendMsgTime != null" >
+        resend_msg_time = #{resendMsgTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where msg_id = #{msgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingge.rtm.pojo.TKMessage" >
+    update t_k_message
+    set msg_name = #{msgName,jdbcType=VARCHAR},
+      topic = #{topic,jdbcType=VARCHAR},
+      quene_name = #{queneName,jdbcType=VARCHAR},
+      msg_content = #{msgContent,jdbcType=VARCHAR},
+      msg_status = #{msgStatus,jdbcType=VARCHAR},
+      msg_d_status = #{msgDStatus,jdbcType=VARCHAR},
+      retry_counts = #{retryCounts,jdbcType=VARCHAR},
+      check_url = #{checkUrl,jdbcType=VARCHAR},
+      check_timeout = #{checkTimeout,jdbcType=VARCHAR},
+      check_duration = #{checkDuration,jdbcType=VARCHAR},
+      create_msg_uid = #{createMsgUid,jdbcType=VARCHAR},
+      create_msg_time = #{createMsgTime,jdbcType=TIMESTAMP},
+      update_msg_uid = #{updateMsgUid,jdbcType=VARCHAR},
+      update_msg_time = #{updateMsgTime,jdbcType=TIMESTAMP},
+      confirm_msg_time = #{confirmMsgTime,jdbcType=TIMESTAMP},
+      resend_msg_uid = #{resendMsgUid,jdbcType=VARCHAR},
+      resend_msg_time = #{resendMsgTime,jdbcType=TIMESTAMP}
+    where msg_id = #{msgId,jdbcType=VARCHAR}
+  </update>
+</mapper>

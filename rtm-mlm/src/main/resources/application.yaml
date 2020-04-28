@@ -1,0 +1,55 @@
+spring:
+  # 数据库连接配置
+  datasource:
+    url: jdbc:mysql://47.112.196.76:9100/rtm?useUnicode=true&serverTimezone=GMT%2B8
+#    url: jdbc:mysql://127.0.0.1:3306/rtm?useUnicode=true&serverTimezone=GMT%2B8
+    username: root
+    password: qq
+    driver-class-name: com.mysql.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: SELECT 1
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092 #指定kafka server的地址，集群配多个，中间，逗号隔开
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: default_consumer_group #群组ID
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+#  cloud:
+#      stream:
+#        kafka:
+#          binder:
+#            brokers: localhost:9092         #Kafka的消息中间件服务器
+#            zk-nodes: 127.0.0.1:2181      #Zookeeper的节点，如果集群，后面加,号分隔
+#            auto-create-topics: true        #如果设置为false,就不会自动创建Topic 有可能你Topic还没创建就直接调用了。
+#        bindings:
+#          output:      #这里用stream给我们提供的默认output，后面会讲到自定义output
+#              destination: stream-demo    #消息发往的目的地
+#              content-type: text/plain    #消息发送的格式，接收端不用指定格式，但是发送端要
+# Dubbo配置
+dubbo:
+  application:
+    name: rtm-mlm
+    logger: slf4j
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20881
+  scan:
+    base-packages: com.kingge.rtm.service.impl
+# mybatis配置
+mybatis:
+  mapper-locations: classpath:com/kingge/rtm/mapper/*Mapper.xml
+  type-aliases-package: com.kingge.rtm.pojo
+
+# springboot启动端口号
+server:
+  port: 9999
+

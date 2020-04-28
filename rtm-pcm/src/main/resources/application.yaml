@@ -1,0 +1,47 @@
+spring:
+  # 数据库连接配置
+  datasource:
+    url: jdbc:mysql://47.112.196.76:9100/rtm?useUnicode=true&serverTimezone=GMT%2B8
+#    url: jdbc:mysql://127.0.0.1:3306/rtm?useUnicode=true&serverTimezone=GMT%2B8
+    username: root
+    password: qq
+    driver-class-name: com.mysql.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: SELECT 1
+
+# Dubbo配置
+dubbo:
+  application:
+    name: rtm-pcm
+    logger: slf4j
+  registry:
+    address: zookeeper://127.0.0.1:2181
+#  scan:
+#    base-packages: com.cn.rmq.schedule.service.impl
+
+timertaskconfig:
+  # 消息向上游服务确认，线程池配置
+  backtocheck:
+    core-pool-size: 10
+    maximum-pool-size: 100
+    keep-alive-time: 60000
+    queue-capacity: 10
+    wait-complete-timeout: 10000
+  # 消息重发mq，线程池配置
+  resendmsg:
+    core-pool-size: 10
+    maximum-pool-size: 100
+    keep-alive-time: 60000
+    queue-capacity: 10
+    wait-complete-timeout: 30000
+    interval:
+      - 1
+      - 2
+      - 4
+      - 10
+      - 30
+      - 60
+      - 120
+      - 360
+      - 900
