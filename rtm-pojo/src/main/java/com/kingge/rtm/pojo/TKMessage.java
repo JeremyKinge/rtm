@@ -1,8 +1,9 @@
 package com.kingge.rtm.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TKMessage {
+public class TKMessage implements Serializable {
     private String msgId;
 
     private String msgName;
