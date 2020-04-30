@@ -24,9 +24,11 @@ public class CheckDeadTimer {
 
     @Scheduled(cron = "0 */2 * * * ? ")//每隔两分钟执行一次
     public void execute() {
-        log.info("【CheckDeadTimer】开始执行。。。。");
+
+        log.info("【CheckDeadTimer】 start execute开始执行。。。。");
         int size = checkDeadService.removeAndMoveDeadMsg();
-        log.info("【CheckDeadTimer】执行结束。。。。一共在操作 " + size + " 条消息");
+        log.info("【CheckDeadTimer】 end execute 执行结束。。。。一共在操作 " + size + " 条消息");
+
     }
 
 
