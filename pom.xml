@@ -35,7 +35,7 @@
 
 		<alibaba.dubbo.version>2.0.0</alibaba.dubbo.version>
 
-		<zookeeper.version>3.4.10</zookeeper.version>
+		<zookeeper.version>3.4.14</zookeeper.version>
 		<curator.version>4.0.1</curator.version>
 	</properties>
 
